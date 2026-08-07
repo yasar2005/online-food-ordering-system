@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        
+        <h3>Create User</h3>
+        <form method="post" action="/admin/user/create">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role" required>
+                <option value="CUSTOMER">Customer</option>
+                <option value="RESTAURANT_OWNER">Restaurant Owner</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+            <button type="submit">Create User</button>
+        </form>
+
+        <h3>Create Restaurant</h3>
+        <form method="post" action="/admin/restaurant/create">
+            <select name="userId" required>
+                <option th:each="user : ${users}" th:if="${user.role.name() == 'RESTAURANT_OWNER'}" 
+                        th:value="${user.id}" th:text="${user.name}"></option>
+            </select>
+            <input type="text" name="name" placeholder="Restaurant Name" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <button type="submit">Create Restaurant</button>
+        </form>
+
+        <h3>All Users</h3>
+        <div th:each="user : ${users}" class="user-item">
+            <p th:text="${user.name} + ' (' + ${user.email} + ') - ' + ${user.role}"></p>
+            <form method="post" th:action="@{/admin/user/delete/{id}(id=${user.id})}" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <h3>All Restaurants</h3>
+        <div th:each="restaurant : ${restaurants}" class="restaurant-item">
+            <p th:text="${restaurant.name} + ' - ' + ${restaurant.address}"></p>
+        </div>
+        
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>

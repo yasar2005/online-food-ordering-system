@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Your Order</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Place Your Order</h2>
+        
+        <form method="post" action="/customer/order/place">
+            <h3>Select Items</h3>
+            <div th:each="item : ${menuItems}" class="menu-item">
+                <input type="checkbox" th:id="'item_' + ${item.id}" th:name="itemIds" th:value="${item.id}">
+                <label th:for="'item_' + ${item.id}">
+                    <strong th:text="${item.name}"></strong> - $<span th:text="${item.price}"></span>
+                    <br><span th:text="${item.description}"></span>
+                </label>
+                <input type="number" th:name="'quantity_' + ${item.id}" min="1" max="10" value="1" style="width:60px;">
+            </div>
+
+            <h3>Special Instructions</h3>
+            <textarea name="instructions" placeholder="Any special requests or dietary requirements?
+Recommendations:
+• For Pizza: Try our signature garlic sauce
+• For Burgers: Add extra cheese for better taste
+• For Spicy items: Request mild spice if sensitive
+• Popular combo: Pizza + Garlic bread
+• Healthy option: Veggie pizza with thin crust"></textarea>
+
+            <h3>Delivery Address</h3>
+            <textarea name="address" placeholder="Enter your delivery address...
+Recommendations:
+• Include apartment/unit number
+• Mention nearby landmarks
+• Provide contact number
+• Specify any delivery instructions
+• Example: 123 Main St, Apt 4B, Near Central Park"></textarea>
+
+            <button type="submit">Place Order</button>
+        </form>
+        
+        <a href="/customer/menu">Back to Menu</a>
+    </div>
+</body>
+</html>

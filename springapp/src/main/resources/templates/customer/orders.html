@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders - Food Ordering</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>My Order History</h2>
+        <div th:each="order : ${orders}" class="order-item">
+            <p>Order #<span th:text="${order.id}"></span></p>
+            <p>Total: $<span th:text="${order.totalPrice}"></span></p>
+            <p>Status: <span th:text="${order.status}"></span></p>
+        </div>
+        <a href="/customer/menu">Back to Menu</a> | 
+        <a href="/logout">Logout</a>
+    </div>
+</body>
+</html>
