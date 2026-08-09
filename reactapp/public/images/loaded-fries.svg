@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#e67e22"/>
+  <!-- Fries container -->
+  <rect x="130" y="140" width="140" height="120" rx="5" fill="#e74c3c"/>
+  <rect x="135" y="145" width="130" height="10" rx="3" fill="#c0392b"/>
+  <!-- Fries -->
+  <rect x="150" y="80" width="12" height="75" rx="4" fill="#f1c40f"/>
+  <rect x="168" y="70" width="12" height="85" rx="4" fill="#f39c12"/>
+  <rect x="186" y="75" width="12" height="80" rx="4" fill="#f1c40f"/>
+  <rect x="204" y="68" width="12" height="87" rx="4" fill="#f39c12"/>
+  <rect x="222" y="73" width="12" height="82" rx="4" fill="#f1c40f"/>
+  <!-- Cheese sauce -->
+  <path d="M 145 155 Q 200 148 255 155 Q 240 165 200 162 Q 160 165 145 155 Z" fill="#f1c40f" opacity="0.9"/>
+  <!-- Jalapeños -->
+  <ellipse cx="175" cy="158" rx="8" ry="4" fill="#27ae60" transform="rotate(-20,175,158)"/>
+  <ellipse cx="225" cy="160" rx="8" ry="4" fill="#27ae60" transform="rotate(15,225,160)"/>
+  <rect x="100" y="20" width="200" height="40" rx="8" fill="rgba(0,0,0,0.4)"/>
+  <text x="200" y="46" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="bold">🍟 Loaded Fries</text>
+</svg>

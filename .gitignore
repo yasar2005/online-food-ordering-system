@@ -1,0 +1,24 @@
+# Node
+reactapp/node_modules/
+
+# React build output
+reactapp/build/
+
+# Local env (keep .env.production for Vercel)
+reactapp/.env
+reactapp/.env.local
+
+# Java build output
+springapp/target/
+
+# IDE
+.vscode/
+*.iml
+.idea/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

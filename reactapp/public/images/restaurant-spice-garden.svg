@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c"/>
+      <stop offset="100%" style="stop-color:#c0392b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#bg)"/>
+  <!-- Decorative spices -->
+  <circle cx="50" cy="50" r="20" fill="#f39c12" opacity="0.3"/>
+  <circle cx="350" cy="150" r="30" fill="#e67e22" opacity="0.3"/>
+  <circle cx="320" cy="40" r="15" fill="#f1c40f" opacity="0.3"/>
+  <!-- Spice pattern -->
+  <text x="30" y="100" font-size="40" opacity="0.2">🌶️</text>
+  <text x="300" y="80" font-size="35" opacity="0.2">🧅</text>
+  <text x="160" y="170" font-size="30" opacity="0.2">🫚</text>
+  <!-- Restaurant name -->
+  <rect x="60" y="60" width="280" height="80" rx="12" fill="rgba(0,0,0,0.4)"/>
+  <text x="200" y="95" text-anchor="middle" fill="white" font-size="22" font-family="Arial" font-weight="bold">🌶️ Spice Garden</text>
+  <text x="200" y="120" text-anchor="middle" fill="#ffcc80" font-size="14" font-family="Arial">North Indian Cuisine</text>
+  <text x="200" y="140" text-anchor="middle" fill="#ffcc80" font-size="12" font-family="Arial">HSR Layout, Bengaluru</text>
+</svg>

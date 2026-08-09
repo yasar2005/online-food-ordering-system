@@ -1,0 +1,14 @@
+# Copy this file to application.properties and fill in your values
+# Do NOT commit application.properties to GitHub
+
+# MySQL Database
+spring.datasource.url=jdbc:mysql://localhost:3306/OnlineFood
+spring.datasource.username=root
+spring.datasource.password=YOUR_PASSWORD_HERE
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=always
+server.port=8080

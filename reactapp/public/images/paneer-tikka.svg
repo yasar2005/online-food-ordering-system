@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f39c12"/>
+      <stop offset="100%" style="stop-color:#e67e22"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bg)"/>
+  <!-- Plate -->
+  <ellipse cx="200" cy="220" rx="170" ry="60" fill="#8B4513" opacity="0.5"/>
+  <ellipse cx="200" cy="210" rx="165" ry="55" fill="#f5f5dc"/>
+  <!-- Skewer 1 -->
+  <rect x="90" y="100" width="8" height="160" rx="4" fill="#8B4513" transform="rotate(-15, 94, 180)"/>
+  <!-- Paneer cubes on skewer 1 -->
+  <rect x="75" y="115" width="38" height="35" rx="5" fill="#f39c12" transform="rotate(-15, 94, 132)"/>
+  <rect x="75" y="115" width="38" height="35" rx="5" fill="#e67e22" opacity="0.5" transform="rotate(-15, 94, 132)"/>
+  <rect x="75" y="158" width="38" height="35" rx="5" fill="#f39c12" transform="rotate(-15, 94, 175)"/>
+  <rect x="75" y="158" width="38" height="35" rx="5" fill="#c0392b" opacity="0.4" transform="rotate(-15, 94, 175)"/>
+  <!-- Skewer 2 -->
+  <rect x="180" y="90" width="8" height="160" rx="4" fill="#8B4513" transform="rotate(-5, 184, 170)"/>
+  <rect x="165" y="105" width="38" height="35" rx="5" fill="#e67e22" transform="rotate(-5, 184, 122)"/>
+  <rect x="165" y="148" width="38" height="35" rx="5" fill="#f39c12" transform="rotate(-5, 184, 165)"/>
+  <!-- Skewer 3 -->
+  <rect x="270" y="95" width="8" height="160" rx="4" fill="#8B4513" transform="rotate(10, 274, 175)"/>
+  <rect x="255" y="110" width="38" height="35" rx="5" fill="#c0392b" transform="rotate(10, 274, 127)"/>
+  <rect x="255" y="153" width="38" height="35" rx="5" fill="#e67e22" transform="rotate(10, 274, 170)"/>
+  <!-- Garnish -->
+  <circle cx="150" cy="205" r="8" fill="#27ae60"/>
+  <circle cx="200" cy="200" r="6" fill="#27ae60"/>
+  <circle cx="250" cy="205" r="7" fill="#27ae60"/>
+  <!-- Lemon -->
+  <ellipse cx="310" cy="210" rx="20" ry="15" fill="#f1c40f"/>
+  <line x1="310" y1="195" x2="310" y2="225" stroke="#f39c12" stroke-width="1"/>
+  <line x1="295" y1="210" x2="325" y2="210" stroke="#f39c12" stroke-width="1"/>
+  <rect x="100" y="20" width="200" height="40" rx="8" fill="rgba(0,0,0,0.4)"/>
+  <text x="200" y="46" text-anchor="middle" fill="white" font-size="18" font-family="Arial" font-weight="bold">🧀 Paneer Tikka</text>
+</svg>
