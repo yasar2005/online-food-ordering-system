@@ -1,29 +1,34 @@
-# Node
+# ── Node ──
 reactapp/node_modules/
-
-# React build output
 reactapp/build/
 
-# Local env (keep .env.production for Vercel)
+# ── Env files (keep .env.production for Vercel build vars) ──
 reactapp/.env
 reactapp/.env.local
+reactapp/.env.development.local
+reactapp/.env.test.local
 
-# Java build output
+# ── Java build ──
 springapp/target/
-
-# H2 embedded DB files
-springapp/data/
-
-# Logs
-*.log
+springapp/*.log
 springapp/backend.log
 
-# IDE
+# ── Embedded DB files ──
+springapp/data/
+
+# ── Logs ──
+*.log
+
+# ── IDE ──
 .vscode/
 *.iml
 .idea/
+*.swp
 
-# System files
+# ── OS ──
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# ── Docker volumes ──
+mysql_data/

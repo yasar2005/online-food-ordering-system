@@ -66,15 +66,14 @@ const OwnerDashboard = ({ user, onLogout }) => {
   };
 
   const S = {
-    page:    { minHeight: '100vh', background: '#f5f5f5', fontFamily: 'Inter, -apple-system, sans-serif', color: '#1c1c1c' },
-    header:  { background: '#fff', padding: '0 32px', height: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' },
-    logo:    { fontSize: '1.4rem', fontWeight: 800, color: '#e23744' },
+    page:      { minHeight: '100vh', background: '#f5f5f5', fontFamily: 'Inter, -apple-system, sans-serif', color: '#1c1c1c' },
+    header:    { background: '#fff', padding: '0 32px', height: 64, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #f0f0f0', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' },
+    logo:      { fontSize: '1.4rem', fontWeight: 800, color: '#e23744' },
     logoutBtn: { background: 'none', border: '1.5px solid #e23744', color: '#e23744', padding: '7px 16px', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem' },
-    tabBar:  { display: 'flex', background: '#fff', borderBottom: '1px solid #f0f0f0', padding: '0 32px' },
-    tab:     (active) => ({ background: 'none', border: 'none', padding: '14px 20px', cursor: 'pointer', fontWeight: 700, fontSize: '0.9rem', color: active ? '#e23744' : '#686b78', borderBottom: active ? '2px solid #e23744' : '2px solid transparent' }),
-    content: { padding: '20px 32px' },
-    card:    { background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', marginBottom: 12 },
-    badge:   (color) => ({ background: color + '20', color, padding: '3px 9px', borderRadius: 6, fontSize: '0.78rem', fontWeight: 700 }),
+    tabBar:    { display: 'flex', background: '#fff', borderBottom: '1px solid #f0f0f0', padding: '0 32px' },
+    tab:       (active) => ({ background: 'none', border: 'none', padding: '14px 20px', cursor: 'pointer', fontWeight: 700, fontSize: '0.9rem', color: active ? '#e23744' : '#686b78', borderBottom: active ? '2px solid #e23744' : '2px solid transparent' }),
+    content:   { padding: '20px 32px' },
+    badge:     (color) => ({ background: color + '20', color, padding: '3px 9px', borderRadius: 6, fontSize: '0.78rem', fontWeight: 700 }),
     actionBtn: { background: '#e23744', color: '#fff', border: 'none', padding: '6px 12px', borderRadius: 6, cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700 },
   };
 
@@ -91,9 +90,9 @@ const OwnerDashboard = ({ user, onLogout }) => {
   }
 
   const stats = {
-    total: orders.length,
+    total:   orders.length,
     pending: orders.filter(o => o.status === 'PENDING').length,
-    active: orders.filter(o => ['CONFIRMED', 'READY'].includes(o.status)).length,
+    active:  orders.filter(o => ['CONFIRMED', 'READY'].includes(o.status)).length,
     revenue: orders.filter(o => o.status === 'COMPLETED').reduce((s, o) => s + parseFloat(o.totalPrice || 0), 0)
   };
 
@@ -105,6 +104,7 @@ const OwnerDashboard = ({ user, onLogout }) => {
         </div>
       )}
 
+      {/* Header */}
       <div style={S.header}>
         <div style={S.logo}>{restaurant.name} <span style={{ color: '#686b78', fontSize: '0.85rem', fontWeight: 500 }}>Owner</span></div>
         <span style={{ color: '#686b78', fontSize: '0.85rem' }}>{restaurant.cuisine} · {restaurant.address}</span>
@@ -126,6 +126,7 @@ const OwnerDashboard = ({ user, onLogout }) => {
         ))}
       </div>
 
+      {/* Tabs */}
       <div style={S.tabBar}>
         {['orders', 'menu'].map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)} style={S.tab(activeTab === tab)}>
@@ -135,24 +136,27 @@ const OwnerDashboard = ({ user, onLogout }) => {
       </div>
 
       <div style={S.content}>
+
+        {/* Orders Tab */}
         {activeTab === 'orders' && (
           <div style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  {['Order', 'Total', 'Payment', 'Status', 'Action'].map(h => (
+                  {['Order', 'Total', 'Payment', 'Address', 'Status', 'Action'].map(h => (
                     <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.75rem', fontWeight: 700, color: '#686b78', textTransform: 'uppercase', letterSpacing: '0.5px', background: '#f9f9f9' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {orders.length === 0 ? (
-                  <tr><td colSpan={5} style={{ textAlign: 'center', padding: 40, color: '#aaa' }}>No orders yet</td></tr>
+                  <tr><td colSpan={6} style={{ textAlign: 'center', padding: 40, color: '#aaa' }}>No orders yet</td></tr>
                 ) : [...orders].reverse().map(order => (
                   <tr key={order.id} style={{ borderTop: '1px solid #f5f5f5' }}>
                     <td style={{ padding: '12px 16px', fontWeight: 700 }}>#{order.id}</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#3ab757' }}>₹{order.totalPrice}</td>
                     <td style={{ padding: '12px 16px', color: '#686b78', fontSize: '0.85rem' }}>{order.paymentMethod || 'COD'}</td>
+                    <td style={{ padding: '12px 16px', color: '#686b78', fontSize: '0.82rem', maxWidth: 180, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{order.deliveryAddress || '—'}</td>
                     <td style={{ padding: '12px 16px' }}><span style={S.badge(STATUS_COLORS[order.status])}>{order.status}</span></td>
                     <td style={{ padding: '12px 16px' }}>
                       {getNextStatus(order.status) && (
@@ -168,31 +172,39 @@ const OwnerDashboard = ({ user, onLogout }) => {
           </div>
         )}
 
+        {/* Menu Tab */}
         {activeTab === 'menu' && (
           <>
+            {/* Edit Modal */}
             {editItem && (
               <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
                 <form onSubmit={saveItem} style={{ background: '#fff', borderRadius: 16, padding: 28, width: '100%', maxWidth: 440 }}>
-                  <h3 style={{ margin: '0 0 20px', fontWeight: 700 }}>Edit Item</h3>
+                  <h3 style={{ margin: '0 0 20px', fontWeight: 700 }}>Edit Menu Item</h3>
                   {[
-                    { label: 'Name', key: 'name', type: 'text' },
-                    { label: 'Price (₹)', key: 'price', type: 'number' },
-                    { label: 'Stock', key: 'stock', type: 'number' },
-                    { label: 'Description', key: 'description', type: 'text' },
+                    { label: 'Name',        key: 'name',        type: 'text'   },
+                    { label: 'Price (₹)',   key: 'price',       type: 'number' },
+                    { label: 'Stock',       key: 'stock',       type: 'number' },
+                    { label: 'Description', key: 'description', type: 'text'   },
                   ].map(f => (
                     <div key={f.key} style={{ marginBottom: 14 }}>
                       <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#686b78', marginBottom: 5, textTransform: 'uppercase' }}>{f.label}</label>
-                      <input type={f.type} value={editItem[f.key] || ''} onChange={e => setEditItem({ ...editItem, [f.key]: e.target.value })}
-                        style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8e8e8', borderRadius: 8, fontSize: '0.92rem' }} required />
+                      <input
+                        type={f.type}
+                        value={editItem[f.key] || ''}
+                        onChange={e => setEditItem({ ...editItem, [f.key]: e.target.value })}
+                        style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e8e8e8', borderRadius: 8, fontSize: '0.92rem', outline: 'none' }}
+                        required
+                      />
                     </div>
                   ))}
                   <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-                    <button type="submit" style={{ flex: 1, background: '#e23744', color: '#fff', border: 'none', padding: 12, borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Save</button>
+                    <button type="submit" style={{ flex: 1, background: '#e23744', color: '#fff', border: 'none', padding: 12, borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Save Changes</button>
                     <button type="button" onClick={() => setEditItem(null)} style={{ flex: 1, background: '#f5f5f5', color: '#1c1c1c', border: 'none', padding: 12, borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>Cancel</button>
                   </div>
                 </form>
               </div>
             )}
+
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 16 }}>
               {menuItems.map(item => (
                 <div key={item.id} style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 1px 4px rgba(0,0,0,0.05)', border: '1px solid #f0f0f0' }}>
@@ -203,8 +215,15 @@ const OwnerDashboard = ({ user, onLogout }) => {
                     </div>
                     <p style={{ margin: '0 0 10px', color: '#686b78', fontSize: '0.8rem', lineHeight: 1.4 }}>{item.description}</p>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={S.badge(item.stock > 0 ? '#3ab757' : '#e23744')}>{item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}</span>
-                      <button onClick={() => setEditItem({ ...item })} style={{ background: 'none', border: '1.5px solid #e23744', color: '#e23744', padding: '5px 12px', borderRadius: 6, cursor: 'pointer', fontWeight: 700, fontSize: '0.8rem' }}>Edit</button>
+                      <span style={S.badge(item.stock > 0 ? '#3ab757' : '#e23744')}>
+                        {item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}
+                      </span>
+                      <button
+                        onClick={() => setEditItem({ ...item })}
+                        style={{ background: 'none', border: '1.5px solid #e23744', color: '#e23744', padding: '5px 12px', borderRadius: 6, cursor: 'pointer', fontWeight: 700, fontSize: '0.8rem' }}
+                      >
+                        Edit
+                      </button>
                     </div>
                   </div>
                 </div>

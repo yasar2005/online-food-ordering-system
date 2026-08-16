@@ -1,9 +1,10 @@
 # 🍽️ FoodieHub — Online Food Ordering System
 
-A production-ready, full-stack food ordering web application inspired by Swiggy and Zomato.
+A production-ready, full-stack food ordering web application inspired by **Zomato** and **Swiggy**.
 
-**React 18** frontend · **Spring Boot 3.4** backend · **MySQL 8** database
+**React 18** frontend · **Spring Boot 3.4** backend · **MySQL 8** database · **Docker** ready · **CI/CD** via GitHub Actions
 
+[![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://your-app.vercel.app)
 [![Backend](https://img.shields.io/badge/Backend-Railway-purple?logo=railway)](https://your-backend.up.railway.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -15,9 +16,9 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 | Service | URL |
 |---|---|
 | Frontend (Vercel) | **[your-app.vercel.app](https://your-app.vercel.app)** |
-| Backend API (Railway) | **[your-backend.up.railway.app](https://your-backend.up.railway.app/api/restaurants)** |
+| Backend API (Railway) | **[your-backend.up.railway.app/api/restaurants](https://your-backend.up.railway.app/api/restaurants)** |
 
-### Quick-start credentials
+### Demo Credentials
 
 | Role | Email | Password |
 |---|---|---|
@@ -29,24 +30,12 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 
 ---
 
-## 📸 Screenshots
-
-| Login | Customer Dashboard | Cart & Checkout |
-|---|---|---|
-| Role-based login with quick-fill buttons | Restaurant cards + menu grid | Cart with coupon, payment modal |
-
-| Order History | Admin Dashboard | Owner Dashboard |
-|---|---|---|
-| Timeline tracker per order | All orders + revenue stats | Menu management + order flow |
-
----
-
 ## ✨ Features
 
 ### 👤 Authentication
 - Signup with name, email, password — validated on both frontend and backend
 - Duplicate email detection with clear error messages
-- Role-based redirect: CUSTOMER → Customer Dashboard, RESTAURANT_OWNER → Owner Dashboard, ADMIN → Admin Dashboard
+- Role-based redirect: **CUSTOMER → Customer Dashboard**, **RESTAURANT_OWNER → Owner Dashboard**, **ADMIN → Admin Dashboard**
 - Session persisted in `localStorage`
 
 ### 🏠 Customer Dashboard
@@ -64,7 +53,7 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 ### 🛒 Cart & Checkout
 - Multi-item cart with quantity increment/decrement
 - Cross-restaurant cart guard (warns before clearing)
-- Coupon code validation via API (WELCOME20, FLAT50, PIZZA10, SAVE100, BIRYANI30)
+- Coupon code validation via API (`WELCOME20`, `FLAT50`, `PIZZA10`, `SAVE100`, `BIRYANI30`)
 - Delivery address input
 - Payment modal: UPI, Credit/Debit Card, Cash on Delivery
 - Real-time subtotal, discount, and grand total
@@ -76,15 +65,15 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 - View all restaurants with order counts
 
 ### 🏪 Restaurant Owner Dashboard
-- View only their restaurant's orders
-- Advance order status
-- Edit menu items (name, price, stock, description)
+- View only their restaurant's orders with full details
+- Advance order status with one click
+- Edit menu items (name, price, stock, description) via modal
 - Revenue and order stats
 
 ### 🏷️ Coupons
 - Percentage and flat-amount discount types
 - Minimum order amount enforcement
-- Seeded codes: WELCOME20, FLAT50, PIZZA10, BIRYANI30, SAVE100
+- Seeded codes: `WELCOME20`, `FLAT50`, `PIZZA10`, `BIRYANI30`, `SAVE100`
 
 ### ⭐ Reviews
 - Customers can review menu items after ordering
@@ -101,9 +90,7 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 | React | 18.2 | UI framework |
 | React Router DOM | 6.20 | Client-side routing |
 | Axios | 1.10 | HTTP client |
-| React Hook Form | 7.48 | Form validation |
-| Redux Toolkit | 1.9 | Global state |
-| CSS (custom) | — | Swiggy-inspired responsive design |
+| CSS (custom) | — | Zomato/Swiggy-inspired responsive design |
 
 ### Backend
 | Technology | Version | Purpose |
@@ -115,13 +102,14 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 | Hibernate | — | ORM |
 | Maven | — | Build tool |
 
-### Database & Infrastructure
+### Infrastructure
 | Technology | Purpose |
 |---|---|
 | MySQL 8 | Primary relational database |
-| Docker + Docker Compose | Local containerised setup |
-| Vercel | Frontend hosting |
-| Railway | Backend + MySQL hosting |
+| Docker + Docker Compose | Containerised local setup |
+| GitHub Actions | CI — build & test on every push |
+| Vercel | Frontend hosting (free tier) |
+| Railway | Backend + MySQL hosting (free tier) |
 
 ---
 
@@ -131,27 +119,24 @@ A production-ready, full-stack food ordering web application inspired by Swiggy 
 Online Food Ordering System/
 ├── reactapp/                        # React 18 frontend
 │   ├── public/images/               # SVG food & restaurant images
-│   └── src/
-│       ├── components/
-│       │   ├── Login.js             # Role-based login with quick-fill
-│       │   ├── Signup.js            # Customer registration
-│       │   ├── CustomerDashboard.js # Full ordering experience
-│       │   ├── AdminDashboard.js    # Order management + stats
-│       │   └── OwnerDashboard.js    # Menu + order management
-│       ├── utils/api.js             # Axios base config
-│       ├── App.js                   # Routing + role-based redirect
-│       ├── auth.css                 # Login/Signup styles
-│       └── dashboard.css            # Dashboard styles
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Login.js             # Role-based login
+│   │   │   ├── Signup.js            # Customer registration
+│   │   │   ├── CustomerDashboard.js # Full ordering experience
+│   │   │   ├── AdminDashboard.js    # Order management + stats
+│   │   │   └── OwnerDashboard.js    # Menu + order management
+│   │   ├── utils/api.js             # Axios base config
+│   │   ├── App.js                   # Routing + role-based redirect
+│   │   ├── auth.css                 # Login/Signup styles
+│   │   └── dashboard.css            # Dashboard styles
+│   ├── Dockerfile                   # Production nginx build
+│   ├── nginx.conf                   # SPA routing config
+│   └── vercel.json                  # Vercel SPA rewrite rules
 │
 ├── springapp/                       # Spring Boot 3.4 backend
 │   └── src/main/java/com/examly/springapp/
-│       ├── controller/
-│       │   ├── AuthRestController.java        # /api/auth
-│       │   ├── RestaurantRestController.java  # /api/restaurants
-│       │   ├── MenuItemRestController.java    # /api/menu-items
-│       │   ├── OrderRestController.java       # /api/orders
-│       │   ├── CouponRestController.java      # /api/coupons
-│       │   └── ReviewRestController.java      # /api/reviews
+│       ├── controller/              # REST controllers
 │       ├── model/                   # JPA entities
 │       ├── repository/              # Spring Data repositories
 │       ├── dto/OrderRequest.java    # Order creation payload
@@ -160,11 +145,12 @@ Online Food Ordering System/
 │   └── src/main/resources/
 │       ├── application.properties   # DB config (env-var driven)
 │       └── data.sql                 # Seed: 5 restaurants, 25 items, coupons
+│   └── Dockerfile                   # Production JRE build
+│   └── railway.json                 # Railway deployment config
 │
+├── .github/workflows/ci.yml         # GitHub Actions CI
 ├── docker-compose.yml               # Full stack: MySQL + backend + frontend
-├── README.md
-├── RUN.md
-└── SETUP.md
+└── README.md
 ```
 
 ---
@@ -219,7 +205,7 @@ Online Food Ordering System/
 
 ---
 
-## ⚙️ How To Run Locally
+## ⚙️ Run Locally
 
 ### Prerequisites
 - Java 17+, Maven
@@ -237,6 +223,8 @@ Edit `springapp/src/main/resources/application.properties`:
 spring.datasource.url=jdbc:mysql://localhost:3306/OnlineFood
 spring.datasource.username=root
 spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+spring.sql.init.mode=always
 ```
 
 ### 3. Start the backend
@@ -245,7 +233,7 @@ cd springapp
 mvnw.cmd spring-boot:run      # Windows
 ./mvnw spring-boot:run        # macOS / Linux
 ```
-Backend: `http://localhost:8080`
+Backend runs at `http://localhost:8080`
 
 ### 4. Start the frontend
 ```bash
@@ -253,63 +241,65 @@ cd reactapp
 npm install
 npm start
 ```
-Frontend: `http://localhost:8081`
+Frontend runs at `http://localhost:8081`
 
 ---
 
 ## 🐳 Run with Docker (no MySQL install needed)
 
 ```bash
-# Build Spring Boot jar first
-cd springapp && mvnw.cmd package -DskipTests && cd ..
-
-# Start everything (MySQL + backend + frontend)
+# Start everything — MySQL + backend + frontend
 docker-compose up --build
 ```
 
-App: `http://localhost:8081` — works on any machine with Docker.
+App: `http://localhost:8081` — works on any machine with Docker installed.
 
 ---
 
 ## ☁️ Deploy to the Cloud (Free Tier)
 
-### Backend → Railway
+### Step 1 — Push to GitHub
 
-1. Push this repo to GitHub
-2. Go to [railway.app](https://railway.app) → New Project → Deploy from GitHub
-3. Select the `springapp` folder
-4. Add a **MySQL** plugin in Railway
-5. Set environment variables:
-   ```
-   SPRING_DATASOURCE_URL=jdbc:mysql://<railway-mysql-host>:3306/railway
-   SPRING_DATASOURCE_USERNAME=root
-   SPRING_DATASOURCE_PASSWORD=<railway-password>
-   SPRING_JPA_HIBERNATE_DDL_AUTO=update
-   SPRING_SQL_INIT_MODE=always
-   ```
-6. Railway auto-detects the `Dockerfile` and deploys. Copy the public URL.
+```bash
+git init
+git add .
+git commit -m "feat: initial production-ready release"
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git push -u origin main
+```
 
-### Frontend → Vercel
+### Step 2 — Backend → Railway
 
-1. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
-2. Set **Root Directory** to `reactapp`
-3. Add environment variable:
-   ```
-   REACT_APP_API_URL=https://your-railway-backend.up.railway.app
-   ```
-4. Deploy. Vercel handles the React build automatically.
-5. Update `reactapp/.env.production` with your Railway URL and push.
-
-### Database Schema (auto-created by Hibernate)
+1. Go to [railway.app](https://railway.app) → **New Project** → **Deploy from GitHub**
+2. Select the repo and set **Root Directory** to `springapp`
+3. Add a **MySQL** plugin inside Railway
+4. Set these environment variables in Railway:
 
 ```
-users         id | name | email | password_hash | role
-restaurants   id | user_id | name | address | cuisine | image_url | rating | delivery_time
-menu_items    id | name | description | price | restaurant_id | stock | image_url | rating | category
-orders        id | customer_id | restaurant_id | total_price | discount_amount | payment_method | delivery_address | status | created_at
-order_items   id | order_id | menu_item_id | quantity
-coupons       id | code | description | discount_type | discount_value | min_order_amount | active
-reviews       id | customer_id | menu_item_id | order_id | rating | comment | customer_name | created_at
+SPRING_DATASOURCE_URL=jdbc:mysql://<railway-mysql-host>:3306/railway
+SPRING_DATASOURCE_USERNAME=root
+SPRING_DATASOURCE_PASSWORD=<railway-password>
+SPRING_JPA_HIBERNATE_DDL_AUTO=update
+SPRING_SQL_INIT_MODE=always
+```
+
+5. Railway auto-detects the `Dockerfile` and deploys. Copy the public URL (e.g. `https://foodiehub.up.railway.app`).
+
+### Step 3 — Frontend → Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **New Project** → Import from GitHub
+2. Set **Root Directory** to `reactapp`
+3. Add environment variable:
+```
+REACT_APP_API_URL=https://your-railway-backend.up.railway.app
+```
+4. Deploy. Vercel handles the React build automatically.
+
+### Step 4 — Update CORS on backend
+
+Add your Vercel URL to Railway env vars:
+```
+CORS_ALLOWED_ORIGINS=https://your-app.vercel.app
 ```
 
 ---
@@ -330,6 +320,17 @@ Spring Boot 3.4 REST API  ──►  MySQL 8
     └── /api/reviews       ReviewRestController
 ```
 
+### Database Schema
+```
+users         id | name | email | password_hash | role
+restaurants   id | user_id | name | address | cuisine | image_url | rating | delivery_time
+menu_items    id | name | description | price | restaurant_id | stock | image_url | rating | category
+orders        id | customer_id | restaurant_id | total_price | discount_amount | payment_method | delivery_address | status | created_at
+order_items   id | order_id | menu_item_id | quantity
+coupons       id | code | description | discount_type | discount_value | min_order_amount | active
+reviews       id | customer_id | menu_item_id | order_id | rating | comment | customer_name | created_at
+```
+
 ---
 
 ## 🔮 Future Improvements
@@ -347,8 +348,8 @@ Spring Boot 3.4 REST API  ──►  MySQL 8
 
 ## 👨‍💻 Author
 
-**Yasar** — Full-Stack Developer  
-Java 17 · Spring Boot 3.4 · React 18 · MySQL · Docker · Deployed on Railway + Vercel
+**Yasar** — Full-Stack Developer
+Java 17 · Spring Boot 3.4 · React 18 · MySQL · Docker · GitHub Actions · Deployed on Railway + Vercel
 
 ---
 
