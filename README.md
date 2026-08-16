@@ -4,9 +4,9 @@ A production-ready, full-stack food ordering web application inspired by **Zomat
 
 **React 18** frontend · **Spring Boot 3.4** backend · **MySQL 8** database · **Docker** ready · **CI/CD** via GitHub Actions
 
-[![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://your-app.vercel.app)
-[![Backend](https://img.shields.io/badge/Backend-Railway-purple?logo=railway)](https://your-backend.up.railway.app)
+[![CI](https://github.com/yasar2005/online-food-ordering-system/actions/workflows/ci.yml/badge.svg)](https://github.com/yasar2005/online-food-ordering-system/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://online-food-ordering-system-teal.vercel.app/login)
+[![Backend](https://img.shields.io/badge/Backend-Render-blue?logo=render)](https://online-food-ordering-system-a66v.onrender.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
@@ -15,8 +15,8 @@ A production-ready, full-stack food ordering web application inspired by **Zomat
 
 | Service | URL |
 |---|---|
-| Frontend (Vercel) | **[your-app.vercel.app](https://your-app.vercel.app)** |
-| Backend API (Railway) | **[your-backend.up.railway.app/api/restaurants](https://your-backend.up.railway.app/api/restaurants)** |
+| Frontend (Vercel) | **[online-food-ordering-system-teal.vercel.app](https://online-food-ordering-system-teal.vercel.app/login)** |
+| Backend API (Render) | **[online-food-ordering-system-a66v.onrender.com/api/restaurants](https://online-food-ordering-system-a66v.onrender.com/api/restaurants)** |
 
 ### Demo Credentials
 
@@ -105,11 +105,11 @@ A production-ready, full-stack food ordering web application inspired by **Zomat
 ### Infrastructure
 | Technology | Purpose |
 |---|---|
-| MySQL 8 | Primary relational database |
+| PostgreSQL | Primary relational database |
 | Docker + Docker Compose | Containerised local setup |
 | GitHub Actions | CI — build & test on every push |
 | Vercel | Frontend hosting (free tier) |
-| Railway | Backend + MySQL hosting (free tier) |
+| Render | Backend + PostgreSQL hosting (free tier) |
 
 ---
 
@@ -264,26 +264,28 @@ App: `http://localhost:8081` — works on any machine with Docker installed.
 git init
 git add .
 git commit -m "feat: initial production-ready release"
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+git remote add origin https://github.com/yasar2005/online-food-ordering-system.git
 git push -u origin main
 ```
 
-### Step 2 — Backend → Railway
+### Step 2 — Backend → Render
 
-1. Go to [railway.app](https://railway.app) → **New Project** → **Deploy from GitHub**
-2. Select the repo and set **Root Directory** to `springapp`
-3. Add a **MySQL** plugin inside Railway
-4. Set these environment variables in Railway:
+1. Go to [render.com](https://render.com) → **New Web Service** → Connect GitHub
+2. Select the repo, set **Root Directory** to `springapp`, **Runtime** to Docker
+3. Add a **PostgreSQL** database on Render
+4. Set these environment variables in Render:
 
 ```
-SPRING_DATASOURCE_URL=jdbc:mysql://<railway-mysql-host>:3306/railway
-SPRING_DATASOURCE_USERNAME=root
-SPRING_DATASOURCE_PASSWORD=<railway-password>
+SPRING_DATASOURCE_URL=jdbc:postgresql://<render-pg-host>:5432/<db-name>
+SPRING_DATASOURCE_USERNAME=<render-pg-user>
+SPRING_DATASOURCE_PASSWORD=<render-pg-password>
+SPRING_DATASOURCE_DRIVER=org.postgresql.Driver
+SPRING_JPA_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
 SPRING_JPA_HIBERNATE_DDL_AUTO=update
 SPRING_SQL_INIT_MODE=always
 ```
 
-5. Railway auto-detects the `Dockerfile` and deploys. Copy the public URL (e.g. `https://foodiehub.up.railway.app`).
+5. Deploy. Copy the public URL (e.g. `https://online-food-ordering-system-a66v.onrender.com`).
 
 ### Step 3 — Frontend → Vercel
 
@@ -291,15 +293,15 @@ SPRING_SQL_INIT_MODE=always
 2. Set **Root Directory** to `reactapp`
 3. Add environment variable:
 ```
-REACT_APP_API_URL=https://your-railway-backend.up.railway.app
+REACT_APP_API_URL=https://online-food-ordering-system-a66v.onrender.com
 ```
 4. Deploy. Vercel handles the React build automatically.
 
 ### Step 4 — Update CORS on backend
 
-Add your Vercel URL to Railway env vars:
+Add your Vercel URL to Render env vars:
 ```
-CORS_ALLOWED_ORIGINS=https://your-app.vercel.app
+CORS_ALLOWED_ORIGINS=https://online-food-ordering-system-teal.vercel.app
 ```
 
 ---
@@ -310,7 +312,7 @@ CORS_ALLOWED_ORIGINS=https://your-app.vercel.app
 Browser (React 18)
     │  Axios HTTP
     ▼
-Spring Boot 3.4 REST API  ──►  MySQL 8
+Spring Boot 3.4 REST API  ──►  PostgreSQL
     │
     ├── /api/auth          AuthRestController
     ├── /api/restaurants   RestaurantRestController
@@ -349,7 +351,7 @@ reviews       id | customer_id | menu_item_id | order_id | rating | comment | cu
 ## 👨‍💻 Author
 
 **Yasar** — Full-Stack Developer
-Java 17 · Spring Boot 3.4 · React 18 · MySQL · Docker · GitHub Actions · Deployed on Railway + Vercel
+Java 17 · Spring Boot 3.4 · React 18 · PostgreSQL · Docker · GitHub Actions · Deployed on Render + Vercel
 
 ---
 
