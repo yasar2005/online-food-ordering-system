@@ -1,3 +1,0 @@
-2025-09-14 14:48:39.898354+05:30 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found; SQL statement:
-INSERT INTO users (name, email, password_hash, role) VALUES ('Admin User', 'admin@food.com', 'admin123', 'ADMIN'), ('Pizza Palace Owner', 'pizza@owner.com', 'owner123', 'RESTAURANT_OWNER'), ('Burger King Owner', 'burger@owner.com', 'owner123', 'RESTAURANT_OWNER'), ('John Customer', 'john@customer.com', 'customer123', 'CUSTOMER'), ('Jane Customer', 'jane@customer.com', 'customer123', 'CUSTOMER') [42102-232]

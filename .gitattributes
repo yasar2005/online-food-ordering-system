@@ -1,0 +1,16 @@
+# Force LF for files that must run on Linux
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+mvnw text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.properties text eol=lf
+*.sql text eol=lf
+*.java text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.md text eol=lf
