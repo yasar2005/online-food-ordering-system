@@ -35,7 +35,7 @@ const Signup = () => {
   return (
     <div className="auth-wrapper">
       <div className="auth-brand">
-        <div className="auth-brand-logo">Foodie<span>Hub</span></div>
+        <div className="auth-brand-logo">FeedMe<span>Now</span></div>
         <p>Join thousands of food lovers. Sign up and start ordering in minutes.</p>
         <div className="auth-brand-illustration">🍕</div>
       </div>

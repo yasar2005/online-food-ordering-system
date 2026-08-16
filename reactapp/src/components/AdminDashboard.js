@@ -73,7 +73,7 @@ const AdminDashboard = ({ user, onLogout }) => {
       {/* Header */}
       <div style={{ background: '#1a1a2e', color: '#fff', padding: '16px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>🍽️ FoodieHub Admin</h1>
+          <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>🍽️ FeedMeNow Admin</h1>
           <p style={{ margin: 0, opacity: 0.7, fontSize: '0.85rem' }}>Welcome back, {user.name}</p>
         </div>
         <button onClick={onLogout} style={{ background: '#e74c3c', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: 6, cursor: 'pointer', fontWeight: 600 }}>

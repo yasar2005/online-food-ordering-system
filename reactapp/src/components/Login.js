@@ -49,7 +49,7 @@ const Login = ({ onLogin }) => {
   return (
     <div className="auth-wrapper">
       <div className="auth-brand">
-        <div className="auth-brand-logo">Foodie<span>Hub</span></div>
+        <div className="auth-brand-logo">FeedMe<span>Now</span></div>
         <p>Order from the best restaurants near you. Fast delivery, great deals.</p>
         <div className="auth-brand-illustration">🍽️</div>
       </div>

@@ -13,7 +13,7 @@ const CustomerDashboard = ({ user, onLogout }) => {
   const [selectedRestaurantId, setSelectedRestaurantId] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [notifications, setNotifications] = useState([
-    { id: 1, message: '🎉 Welcome to FoodieHub!', type: 'welcome' },
+    { id: 1, message: '🎉 Welcome to FeedMeNow!', type: 'welcome' },
     { id: 2, message: '🔥 Use code WELCOME20 for 20% off!', type: 'offer' }
   ]);
   const [showPaymentModal, setShowPaymentModal] = useState(false);

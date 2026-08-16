@@ -1,4 +1,4 @@
-# 🍽️ FoodieHub — Online Food Ordering System
+# 🍽️ FeedMeNow — Online Food Ordering System
 
 A production-ready, full-stack food ordering web application inspired by **Zomato** and **Swiggy**.
 
