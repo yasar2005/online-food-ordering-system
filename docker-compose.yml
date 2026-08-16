@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: foodiehub-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-foodiehub123}
+      MYSQL_DATABASE: OnlineFood
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./springapp
+    container_name: foodiehub-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/OnlineFood?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD:-foodiehub123}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INIT_MODE: always
+      CORS_ALLOWED_ORIGINS: http://localhost:8081,http://foodiehub-frontend:80
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./reactapp
+      args:
+        REACT_APP_API_URL: http://localhost:8080
+    container_name: foodiehub-frontend
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

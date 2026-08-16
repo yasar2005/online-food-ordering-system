@@ -4,31 +4,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    // 🔹 Handle ResourceNotFoundException
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException ex) {
-        Map<String, Object> errorBody = new HashMap<>();
-        errorBody.put("timestamp", LocalDateTime.now());
-        errorBody.put("message", ex.getMessage());
-        errorBody.put("status", HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        body.put("status", HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    // 🔹 Handle other exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGeneralException(Exception ex) {
-        Map<String, Object> errorBody = new HashMap<>();
-        errorBody.put("timestamp", LocalDateTime.now());
-        errorBody.put("message", ex.getMessage());
-        errorBody.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        return new ResponseEntity<>(errorBody, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgument(IllegalArgumentException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }

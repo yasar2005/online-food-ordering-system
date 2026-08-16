@@ -1,47 +1,95 @@
-# 🍽️ Online Food Ordering System
+# 🍽️ FoodieHub — Online Food Ordering System
 
-A full-stack food ordering web application inspired by Swiggy and Zomato, built with **React 18** on the frontend and **Spring Boot 3.4** on the backend, backed by a **MySQL** database.
+A production-ready, full-stack food ordering web application inspired by Swiggy and Zomato.
 
-Users can sign up, browse restaurants and menus, add items to a cart, simulate a payment, and place orders. Admins can view and manage all orders from a dedicated dashboard.
+**React 18** frontend · **Spring Boot 3.4** backend · **MySQL 8** database
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://your-app.vercel.app)
+[![Backend](https://img.shields.io/badge/Backend-Railway-purple?logo=railway)](https://your-backend.up.railway.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
 ## 🚀 Live Demo
 
-> Run locally — see [How To Run](#how-to-run) below.  
-> Deployable via Docker — see [Deployment](#deployment) below.
+| Service | URL |
+|---|---|
+| Frontend (Vercel) | **[your-app.vercel.app](https://your-app.vercel.app)** |
+| Backend API (Railway) | **[your-backend.up.railway.app](https://your-backend.up.railway.app/api/restaurants)** |
+
+### Quick-start credentials
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@food.com | admin123 |
+| Restaurant Owner | spice@owner.com | owner123 |
+| Customer | customer@food.com | customer123 |
+
+> Or sign up as a new customer — no email verification required.
 
 ---
 
 ## 📸 Screenshots
 
-| Login Page | Customer Dashboard | Cart & Checkout |
+| Login | Customer Dashboard | Cart & Checkout |
 |---|---|---|
-| Clean auth UI with form validation | Restaurant cards + menu grid with food images | Cart with quantity controls and payment modal |
+| Role-based login with quick-fill buttons | Restaurant cards + menu grid | Cart with coupon, payment modal |
 
-| Order History | Admin Dashboard |
-|---|---|
-| Per-customer order tracking with status badges | Admin view of all orders with status update controls |
+| Order History | Admin Dashboard | Owner Dashboard |
+|---|---|---|
+| Timeline tracker per order | All orders + revenue stats | Menu management + order flow |
 
 ---
 
-## 🧠 What This Project Demonstrates
+## ✨ Features
 
-This project was built to demonstrate end-to-end full-stack development skills including:
+### 👤 Authentication
+- Signup with name, email, password — validated on both frontend and backend
+- Duplicate email detection with clear error messages
+- Role-based redirect: CUSTOMER → Customer Dashboard, RESTAURANT_OWNER → Owner Dashboard, ADMIN → Admin Dashboard
+- Session persisted in `localStorage`
 
-- Designing and consuming **REST APIs** from a React frontend
-- Building a **Spring Boot** backend with layered architecture (Controller → Repository → DB)
-- **JPA / Hibernate** ORM with MySQL for data persistence
-- **Role-based routing** — CUSTOMER, RESTAURANT_OWNER, and ADMIN see different dashboards
-- **Cart management** with quantity controls and real-time total calculation
-- **Payment simulation** with UPI, Card, and Cash on Delivery flows
-- **Order lifecycle management** — PENDING → CONFIRMED → READY → COMPLETED
-- **Admin dashboard** to view all orders and update their status
-- **Responsive UI** with a Swiggy/Zomato-inspired design using CSS Grid and Flexbox
-- **LocalStorage** for persisting favorites and session data
-- **Input validation** on both frontend and backend
-- **CORS configuration** for cross-origin frontend-backend communication
-- **Seed data** loaded via `data.sql` for instant demo readiness
+### 🏠 Customer Dashboard
+- Restaurant cards with cuisine, rating, delivery time
+- Menu grid with food images, stock badges, ratings
+- Live search across item name, description, and restaurant name
+- Category filters: All, Indian, Biryani, Pizza, Burger, Chinese
+- Restaurant filter strip — click to show only that restaurant's menu
+- Add to cart with quantity controls and real-time total
+- Favorites — heart items, persisted in `localStorage`
+- Order cancellation for PENDING orders
+- Order history with visual timeline tracker (PENDING → CONFIRMED → READY → COMPLETED)
+- Toast notifications for all actions
+
+### 🛒 Cart & Checkout
+- Multi-item cart with quantity increment/decrement
+- Cross-restaurant cart guard (warns before clearing)
+- Coupon code validation via API (WELCOME20, FLAT50, PIZZA10, SAVE100, BIRYANI30)
+- Delivery address input
+- Payment modal: UPI, Credit/Debit Card, Cash on Delivery
+- Real-time subtotal, discount, and grand total
+
+### 🔧 Admin Dashboard
+- Stats: total orders, pending, active, completed, total revenue
+- Filter orders by status
+- Advance order status: PENDING → CONFIRMED → READY → COMPLETED
+- View all restaurants with order counts
+
+### 🏪 Restaurant Owner Dashboard
+- View only their restaurant's orders
+- Advance order status
+- Edit menu items (name, price, stock, description)
+- Revenue and order stats
+
+### 🏷️ Coupons
+- Percentage and flat-amount discount types
+- Minimum order amount enforcement
+- Seeded codes: WELCOME20, FLAT50, PIZZA10, BIRYANI30, SAVE100
+
+### ⭐ Reviews
+- Customers can review menu items after ordering
+- One review per item per order enforced
+- Reviews stored with rating (1–5) and comment
 
 ---
 
@@ -52,30 +100,28 @@ This project was built to demonstrate end-to-end full-stack development skills i
 |---|---|---|
 | React | 18.2 | UI framework |
 | React Router DOM | 6.20 | Client-side routing |
-| Axios | 1.10 | HTTP client for API calls |
-| React Hook Form | 7.48 | Form state and validation |
-| React Query | 3.39 | Server state management |
-| Redux Toolkit | 1.9 | Global state management |
-| CSS (custom) | — | Swiggy-style responsive design |
-| Jest + React Testing Library | — | Unit and component testing |
+| Axios | 1.10 | HTTP client |
+| React Hook Form | 7.48 | Form validation |
+| Redux Toolkit | 1.9 | Global state |
+| CSS (custom) | — | Swiggy-inspired responsive design |
 
 ### Backend
 | Technology | Version | Purpose |
 |---|---|---|
 | Java | 17 | Language |
 | Spring Boot | 3.4 | Application framework |
-| Spring Web | — | REST API layer |
 | Spring Data JPA | — | Database abstraction |
 | Spring Validation | — | Request validation |
-| Hibernate | — | ORM / SQL generation |
-| Thymeleaf | — | Server-side templates (legacy views) |
-| Maven | — | Build and dependency management |
+| Hibernate | — | ORM |
+| Maven | — | Build tool |
 
-### Database
+### Database & Infrastructure
 | Technology | Purpose |
 |---|---|
 | MySQL 8 | Primary relational database |
-| data.sql | Seed data — restaurants, menus, users |
+| Docker + Docker Compose | Local containerised setup |
+| Vercel | Frontend hosting |
+| Railway | Backend + MySQL hosting |
 
 ---
 
@@ -83,103 +129,43 @@ This project was built to demonstrate end-to-end full-stack development skills i
 
 ```
 Online Food Ordering System/
-├── reactapp/                        # React frontend
-│   ├── public/
+├── reactapp/                        # React 18 frontend
+│   ├── public/images/               # SVG food & restaurant images
 │   └── src/
 │       ├── components/
-│       │   ├── Login.js             # Login page with validation
-│       │   ├── Signup.js            # Signup page with validation
-│       │   ├── CustomerDashboard.js # Main customer experience
-│       │   ├── AdminDashboard.js    # Admin order management
-│       │   ├── AddOrder.js          # Legacy order form
-│       │   └── OrderList.js         # Legacy order list
-│       ├── utils/
-│       │   └── api.js               # Axios base config
-│       ├── App.js                   # Routing + role-based dashboard
+│       │   ├── Login.js             # Role-based login with quick-fill
+│       │   ├── Signup.js            # Customer registration
+│       │   ├── CustomerDashboard.js # Full ordering experience
+│       │   ├── AdminDashboard.js    # Order management + stats
+│       │   └── OwnerDashboard.js    # Menu + order management
+│       ├── utils/api.js             # Axios base config
+│       ├── App.js                   # Routing + role-based redirect
 │       ├── auth.css                 # Login/Signup styles
 │       └── dashboard.css            # Dashboard styles
 │
-├── springapp/                       # Spring Boot backend
+├── springapp/                       # Spring Boot 3.4 backend
 │   └── src/main/java/com/examly/springapp/
 │       ├── controller/
-│       │   ├── AuthRestController.java        # POST /api/auth/signup, /login
-│       │   ├── RestaurantRestController.java  # GET /api/restaurants
-│       │   ├── MenuItemRestController.java    # GET /api/menu-items
-│       │   ├── OrderRestController.java       # GET/POST /api/orders
-│       │   └── FoodOrderController.java       # Legacy CRUD flow
-│       ├── model/
-│       │   ├── User.java            # Entity: id, name, email, password, role
-│       │   ├── Restaurant.java      # Entity: id, name, address, cuisine, rating
-│       │   ├── MenuItem.java        # Entity: id, name, price, stock, restaurantId
-│       │   ├── Order.java           # Entity: id, customerId, totalPrice, status
-│       │   ├── OrderItem.java       # Entity: orderId, menuItemId, quantity
-│       │   └── FoodOrder.java       # Legacy entity
-│       ├── repository/              # Spring Data JPA repositories
-│       ├── dto/
-│       │   └── OrderRequest.java    # Order creation payload
-│       ├── exception/
-│       │   └── GlobalExceptionHandler.java
-│       └── configuration/
-│           └── WebConfig.java       # CORS configuration
+│       │   ├── AuthRestController.java        # /api/auth
+│       │   ├── RestaurantRestController.java  # /api/restaurants
+│       │   ├── MenuItemRestController.java    # /api/menu-items
+│       │   ├── OrderRestController.java       # /api/orders
+│       │   ├── CouponRestController.java      # /api/coupons
+│       │   └── ReviewRestController.java      # /api/reviews
+│       ├── model/                   # JPA entities
+│       ├── repository/              # Spring Data repositories
+│       ├── dto/OrderRequest.java    # Order creation payload
+│       ├── exception/               # Global exception handler
+│       └── configuration/WebConfig.java  # CORS config
 │   └── src/main/resources/
-│       ├── application.properties   # DB config
-│       └── data.sql                 # Seed data (5 restaurants, 25 menu items)
+│       ├── application.properties   # DB config (env-var driven)
+│       └── data.sql                 # Seed: 5 restaurants, 25 items, coupons
 │
+├── docker-compose.yml               # Full stack: MySQL + backend + frontend
 ├── README.md
 ├── RUN.md
 └── SETUP.md
 ```
-
----
-
-## ✨ Features
-
-### 👤 Authentication
-- User signup with name, email, password
-- Email format validation and minimum password length enforced on both frontend and backend
-- Duplicate email detection with clear error messages
-- Login returns user object with role — stored in `localStorage`
-- Role-based redirect: CUSTOMER → Customer Dashboard, ADMIN → Admin Dashboard
-
-### 🏠 Customer Dashboard
-- **Restaurant cards** — name, cuisine, rating, delivery time, cover image
-- **Menu grid** — food images, name, description, price, stock badge, rating
-- **Search** — live filter across item name and description
-- **Category filters** — All, Pizza, Burger, Biryani, Chinese, Indian
-- **Add to cart** — with quantity increment/decrement and auto-total
-- **Favorites** — heart items, persisted in `localStorage`
-- **Payment modal** — choose UPI, Credit/Debit Card, or Cash on Delivery
-- **Order placement** — sends order to backend, clears cart on success
-- **Order history** — lists all past orders with status badges
-- **Toast notifications** — success/error feedback for all actions
-
-### 🛒 Cart
-- Add, remove, and update item quantities
-- Real-time subtotal and grand total
-- Checkout triggers payment modal before placing order
-
-### 💳 Payment (Simulated)
-- UPI — enter UPI ID and confirm
-- Card — enter card number, expiry, CVV
-- Cash on Delivery — one-click confirm
-- All flows simulate payment and then call the order API
-
-### 🔧 Admin Dashboard
-- View all orders across all customers
-- See order ID, customer ID, restaurant, total, and current status
-- Update order status: PENDING → CONFIRMED → READY → COMPLETED
-- Status changes call `PATCH /api/orders/{id}/status` on the backend
-
-### 🍕 Restaurants & Menu (Seed Data)
-| Restaurant | Cuisine | Location |
-|---|---|---|
-| Spice Garden | North Indian | HSR Layout, Bengaluru |
-| Burger Bros | American | Koramangala, Bengaluru |
-| Pizza House | Italian | Indiranagar, Bengaluru |
-| Biryani Palace | Hyderabadi | Banjara Hills, Hyderabad |
-| Wok Express | Chinese | Jubilee Hills, Hyderabad |
-
-25 menu items across all 5 restaurants with realistic names, descriptions, and prices in INR.
 
 ---
 
@@ -190,6 +176,7 @@ Online Food Ordering System/
 |---|---|---|
 | POST | `/api/auth/signup` | Register a new customer |
 | POST | `/api/auth/login` | Login and get user object |
+| GET | `/api/auth/users` | List all users |
 
 ### Restaurants
 | Method | Endpoint | Description |
@@ -201,67 +188,45 @@ Online Food Ordering System/
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/api/menu-items` | Get all menu items |
-| GET | `/api/menu-items/available` | Get in-stock items only |
-| GET | `/api/menu-items/restaurant/{id}` | Get items by restaurant |
+| GET | `/api/menu-items/available` | In-stock items only |
+| GET | `/api/menu-items/restaurant/{id}` | Items by restaurant |
+| POST | `/api/menu-items` | Create menu item |
+| PUT | `/api/menu-items/{id}` | Update menu item |
+| DELETE | `/api/menu-items/{id}` | Delete menu item |
 
 ### Orders
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/orders` | Get all orders (admin) |
-| GET | `/api/orders/customer/{id}` | Get orders by customer |
-| GET | `/api/orders/restaurant/{id}` | Get orders by restaurant |
+| GET | `/api/orders` | All orders (admin) |
+| GET | `/api/orders/customer/{id}` | Orders by customer |
+| GET | `/api/orders/restaurant/{id}` | Orders by restaurant |
 | POST | `/api/orders` | Place a new order |
-| PATCH | `/api/orders/{id}/status` | Update order status (admin) |
+| PATCH | `/api/orders/{id}/status` | Update order status |
+| PATCH | `/api/orders/{id}/cancel` | Cancel a PENDING order |
 
-### Request / Response Examples
+### Coupons
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/coupons` | List all coupons |
+| POST | `/api/coupons/validate` | Validate and calculate discount |
 
-**POST /api/auth/signup**
-```json
-// Request
-{ "name": "Yasar", "email": "yasar@example.com", "password": "pass123" }
-
-// Response
-{ "success": true, "message": "Account created successfully" }
-```
-
-**POST /api/orders**
-```json
-// Request
-{
-  "customerId": 4,
-  "restaurantId": 1,
-  "totalPrice": 548.00,
-  "status": "PENDING",
-  "items": [
-    { "menuItemId": 1, "quantity": 2 },
-    { "menuItemId": 3, "quantity": 1 }
-  ]
-}
-
-// Response
-{ "success": true, "orderId": 12 }
-```
-
-**PATCH /api/orders/12/status**
-```json
-// Request
-{ "status": "CONFIRMED" }
-
-// Response
-{ "success": true }
-```
+### Reviews
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/reviews/menu-item/{id}` | Reviews for a menu item |
+| GET | `/api/reviews/customer/{id}` | Reviews by a customer |
+| POST | `/api/reviews` | Submit a review |
 
 ---
 
-## ⚙️ How To Run
+## ⚙️ How To Run Locally
 
 ### Prerequisites
-- Java 17+
-- Node.js 18+ and npm
+- Java 17+, Maven
+- Node.js 18+, npm
 - MySQL 8 running locally
-- A database named `OnlineFood`
 
-### 1. Create the MySQL database
+### 1. Create the database
 ```sql
 CREATE DATABASE OnlineFood;
 ```
@@ -272,21 +237,15 @@ Edit `springapp/src/main/resources/application.properties`:
 spring.datasource.url=jdbc:mysql://localhost:3306/OnlineFood
 spring.datasource.username=root
 spring.datasource.password=your_password
-spring.jpa.hibernate.ddl-auto=update
-spring.sql.init.mode=always
 ```
 
 ### 3. Start the backend
 ```bash
 cd springapp
-
-# macOS / Linux
-./mvnw spring-boot:run
-
-# Windows
-mvnw.cmd spring-boot:run
+mvnw.cmd spring-boot:run      # Windows
+./mvnw spring-boot:run        # macOS / Linux
 ```
-Backend runs at: `http://localhost:8080`
+Backend: `http://localhost:8080`
 
 ### 4. Start the frontend
 ```bash
@@ -294,140 +253,105 @@ cd reactapp
 npm install
 npm start
 ```
-Frontend runs at: `http://localhost:8081`
-
-### 5. Default login credentials
-| Role | Email | Password |
-|---|---|---|
-| Admin | admin@food.com | admin123 |
-| Restaurant Owner | spice@owner.com | owner123 |
-| Customer | Sign up yourself | your choice |
+Frontend: `http://localhost:8081`
 
 ---
 
-## 🐳 Deployment
+## 🐳 Run with Docker (no MySQL install needed)
 
-### Deploy with Docker (run anywhere)
-
-**1. Create `springapp/Dockerfile`:**
-```dockerfile
-FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-COPY target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
-```
-
-**2. Create `reactapp/Dockerfile`:**
-```dockerfile
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-```
-
-**3. Create `docker-compose.yml` at project root:**
-```yaml
-version: '3.8'
-services:
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: OnlineFood
-    ports:
-      - "3306:3306"
-
-  backend:
-    build: ./springapp
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/OnlineFood
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-    depends_on:
-      - mysql
-
-  frontend:
-    build: ./reactapp
-    ports:
-      - "8081:80"
-    depends_on:
-      - backend
-```
-
-**4. Build and run:**
 ```bash
-# Build the Spring Boot jar first
+# Build Spring Boot jar first
 cd springapp && mvnw.cmd package -DskipTests && cd ..
 
-# Start everything
+# Start everything (MySQL + backend + frontend)
 docker-compose up --build
 ```
 
-App is now live at `http://localhost:8081` — works on any machine with Docker.
-
-### Deploy to the Cloud
-
-| Platform | How |
-|---|---|
-| **AWS** | Backend → Elastic Beanstalk or EC2. Frontend → S3 + CloudFront. DB → RDS MySQL |
-| **Railway** | Connect GitHub repo, set env vars, deploy backend and frontend as separate services |
-| **Render** | Free tier — deploy Spring Boot as a Web Service, React as a Static Site |
-| **Vercel + Railway** | Frontend on Vercel (free), backend on Railway (free tier) |
+App: `http://localhost:8081` — works on any machine with Docker.
 
 ---
 
-## 🗄️ Database Schema
+## ☁️ Deploy to the Cloud (Free Tier)
+
+### Backend → Railway
+
+1. Push this repo to GitHub
+2. Go to [railway.app](https://railway.app) → New Project → Deploy from GitHub
+3. Select the `springapp` folder
+4. Add a **MySQL** plugin in Railway
+5. Set environment variables:
+   ```
+   SPRING_DATASOURCE_URL=jdbc:mysql://<railway-mysql-host>:3306/railway
+   SPRING_DATASOURCE_USERNAME=root
+   SPRING_DATASOURCE_PASSWORD=<railway-password>
+   SPRING_JPA_HIBERNATE_DDL_AUTO=update
+   SPRING_SQL_INIT_MODE=always
+   ```
+6. Railway auto-detects the `Dockerfile` and deploys. Copy the public URL.
+
+### Frontend → Vercel
+
+1. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
+2. Set **Root Directory** to `reactapp`
+3. Add environment variable:
+   ```
+   REACT_APP_API_URL=https://your-railway-backend.up.railway.app
+   ```
+4. Deploy. Vercel handles the React build automatically.
+5. Update `reactapp/.env.production` with your Railway URL and push.
+
+### Database Schema (auto-created by Hibernate)
 
 ```
-users
-  id | name | email | password_hash | role (ADMIN, RESTAURANT_OWNER, CUSTOMER)
+users         id | name | email | password_hash | role
+restaurants   id | user_id | name | address | cuisine | image_url | rating | delivery_time
+menu_items    id | name | description | price | restaurant_id | stock | image_url | rating | category
+orders        id | customer_id | restaurant_id | total_price | discount_amount | payment_method | delivery_address | status | created_at
+order_items   id | order_id | menu_item_id | quantity
+coupons       id | code | description | discount_type | discount_value | min_order_amount | active
+reviews       id | customer_id | menu_item_id | order_id | rating | comment | customer_name | created_at
+```
 
-restaurants
-  id | user_id | name | address | cuisine | image_url | rating | delivery_time
+---
 
-menu_items
-  id | name | description | price | restaurant_id | stock | image_url | rating | category
+## 🗺️ Architecture
 
-orders
-  id | customer_id | restaurant_id | total_price | status (PENDING, CONFIRMED, READY, COMPLETED)
-
-order_items
-  id | order_id | menu_item_id | quantity
+```
+Browser (React 18)
+    │  Axios HTTP
+    ▼
+Spring Boot 3.4 REST API  ──►  MySQL 8
+    │
+    ├── /api/auth          AuthRestController
+    ├── /api/restaurants   RestaurantRestController
+    ├── /api/menu-items    MenuItemRestController
+    ├── /api/orders        OrderRestController
+    ├── /api/coupons       CouponRestController
+    └── /api/reviews       ReviewRestController
 ```
 
 ---
 
 ## 🔮 Future Improvements
 
-- [ ] Spring Security with BCrypt password hashing and JWT tokens
-- [ ] Real payment gateway integration (Razorpay / Stripe)
-- [ ] Restaurant owner dashboard — manage menu, view own orders
+- [ ] Spring Security + BCrypt password hashing + JWT tokens
+- [ ] Real payment gateway (Razorpay / Stripe)
 - [ ] Real-time order tracking with WebSockets
 - [ ] Push notifications for order status changes
-- [ ] Google Maps integration for delivery address
 - [ ] Image upload for menu items (AWS S3)
-- [ ] Pagination and infinite scroll for menu
-- [ ] Review and rating system per order
-- [ ] Coupon and discount code system
+- [ ] Pagination and infinite scroll
+- [ ] Google Maps delivery address autocomplete
+- [ ] Email confirmation on signup
 
 ---
 
 ## 👨‍💻 Author
 
-**Yasar**  
-Full-Stack Developer  
-Built with Java 17, Spring Boot 3.4, React 18, and MySQL
+**Yasar** — Full-Stack Developer  
+Java 17 · Spring Boot 3.4 · React 18 · MySQL · Docker · Deployed on Railway + Vercel
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT License — see [LICENSE](LICENSE)

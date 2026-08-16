@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurants")
-@CrossOrigin(origins = "http://localhost:8081")
 public class RestaurantRestController {
 
     @Autowired

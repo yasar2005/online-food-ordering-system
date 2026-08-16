@@ -7,6 +7,12 @@ const STATUS_COLORS = {
   COMPLETED: '#27ae60', CANCELLED: '#e74c3c'
 };
 
+const getImageSrc = (url) => {
+  if (!url) return '/images/food-default.svg';
+  if (url.startsWith('http')) return url;
+  return url.startsWith('/') ? url : `/images/${url}`;
+};
+
 const AdminDashboard = ({ user, onLogout }) => {
   const [orders, setOrders] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
@@ -171,7 +177,7 @@ const AdminDashboard = ({ user, onLogout }) => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
             {restaurants.map(r => (
               <div key={r.id} style={{ background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-                <img src={r.imageUrl} alt={r.name} style={{ width: '100%', height: 160, objectFit: 'cover' }}
+                <img src={getImageSrc(r.imageUrl)} alt={r.name} style={{ width: '100%', height: 160, objectFit: 'cover' }}
                   onError={e => { e.target.onerror = null; e.target.src = '/images/food-default.svg'; }} />
                 <div style={{ padding: 16 }}>
                   <h3 style={{ margin: '0 0 4px', color: '#333' }}>{r.name}</h3>

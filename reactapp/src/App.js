@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Signup from './components/Signup';
 import CustomerDashboard from './components/CustomerDashboard';
+import OwnerDashboard from './components/OwnerDashboard';
+import AdminDashboard from './components/AdminDashboard';
 import './App.css';
 
 function App() {
@@ -36,21 +38,9 @@ function App() {
       case 'CUSTOMER':
         return <CustomerDashboard user={user} onLogout={handleLogout} />;
       case 'RESTAURANT_OWNER':
-        return (
-          <div className="dashboard">
-            <h1>Restaurant Owner Dashboard</h1>
-            <p>Welcome, {user.name}!</p>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        );
+        return <OwnerDashboard user={user} onLogout={handleLogout} />;
       case 'ADMIN':
-        return (
-          <div className="dashboard">
-            <h1>Admin Dashboard</h1>
-            <p>Welcome, {user.name}!</p>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        );
+        return <AdminDashboard user={user} onLogout={handleLogout} />;
       default:
         return <Navigate to="/login" />;
     }

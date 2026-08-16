@@ -11,14 +11,19 @@ reactapp/.env.local
 # Java build output
 springapp/target/
 
+# H2 embedded DB files
+springapp/data/
+
+# Logs
+*.log
+springapp/backend.log
+
 # IDE
 .vscode/
 *.iml
 .idea/
 
-# Logs
-*.log
-
 # System files
 .DS_Store
 Thumbs.db
+desktop.ini

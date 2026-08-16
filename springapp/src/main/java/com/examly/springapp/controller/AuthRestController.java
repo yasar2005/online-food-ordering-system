@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Locale;
@@ -97,6 +98,18 @@ public class AuthRestController {
         response.put("success", false);
         response.put("message", "Invalid credentials");
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/users")
+    public List<Map<String, Object>> getUsers() {
+        return userRepository.findAll().stream().map(user -> {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("id", user.getId());
+            userData.put("name", user.getName());
+            userData.put("email", user.getEmail());
+            userData.put("role", user.getRole().toString());
+            return userData;
+        }).toList();
     }
 
     private String normalize(String value) {

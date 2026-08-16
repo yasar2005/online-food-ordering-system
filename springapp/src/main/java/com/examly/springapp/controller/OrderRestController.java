@@ -5,6 +5,7 @@ import com.examly.springapp.model.OrderItem;
 import com.examly.springapp.repository.OrderRepository;
 import com.examly.springapp.repository.OrderItemRepository;
 import com.examly.springapp.dto.OrderRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "http://localhost:8081")
 public class OrderRestController {
 
     @Autowired
@@ -25,20 +25,12 @@ public class OrderRestController {
 
     @GetMapping
     public List<Order> getAllOrders() {
-        List<Order> allOrders = orderRepository.findAll();
-        System.out.println("Total orders in database: " + allOrders.size());
-        for (Order order : allOrders) {
-            System.out.println("Order ID: " + order.getId() + ", Customer ID: " + order.getCustomerId());
-        }
-        return allOrders;
+        return orderRepository.findAll();
     }
 
     @GetMapping("/customer/{customerId}")
     public List<Order> getOrdersByCustomer(@PathVariable Long customerId) {
-        System.out.println("Fetching orders for customer ID: " + customerId);
-        List<Order> orders = orderRepository.findByCustomerId(customerId);
-        System.out.println("Found " + orders.size() + " orders for customer " + customerId);
-        return orders;
+        return orderRepository.findByCustomerId(customerId);
     }
 
     @GetMapping("/restaurant/{restaurantId}")
@@ -60,13 +52,31 @@ public class OrderRestController {
         });
     }
 
+    @PatchMapping("/{id}/cancel")
+    public ResponseEntity<Map<String, Object>> cancelOrder(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        return orderRepository.findById(id).map(order -> {
+            if (order.getStatus() == Order.Status.PENDING) {
+                order.setStatus(Order.Status.CANCELLED);
+                orderRepository.save(order);
+                response.put("success", true);
+            } else {
+                response.put("success", false);
+                response.put("message", "Only PENDING orders can be cancelled");
+            }
+            return ResponseEntity.ok(response);
+        }).orElseGet(() -> {
+            response.put("success", false);
+            return ResponseEntity.notFound().build();
+        });
+    }
+
     @PostMapping
     public ResponseEntity<Map<String, Object>> createOrder(@RequestBody OrderRequest request) {
         Map<String, Object> response = new HashMap<>();
         
         try {
             System.out.println("Creating order for customer ID: " + request.getCustomerId());
-            System.out.println("Order total: " + request.getTotalPrice());
             
             // Create order
             Order order = new Order(
@@ -75,8 +85,14 @@ public class OrderRestController {
                 request.getTotalPrice(),
                 Order.Status.PENDING
             );
+            order.setPaymentMethod(request.getPaymentMethod());
+            if (request.getPaymentDetails() != null) {
+                ObjectMapper mapper = new ObjectMapper();
+                order.setPaymentDetails(mapper.writeValueAsString(request.getPaymentDetails()));
+            }
+            order.setDeliveryAddress(request.getDeliveryAddress());
+            order.setDiscountAmount(request.getDiscountAmount());
             Order savedOrder = orderRepository.save(order);
-            System.out.println("Order saved with ID: " + savedOrder.getId());
             
             // Create order items
             if (request.getItems() != null) {
